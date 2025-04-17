@@ -147,5 +147,9 @@ left join t_jcsjzx_hjkq_jcd jcd on jcd.cddm = xsz.cddm
 update t_admin_rms_zzjg set sfyx = '0' where xh = '1' 卡死了，请分析原因
 ```
 
+5. 分析健康状态 prompt如下
+```
+检测mysql当前的健康状态
+```
 
 

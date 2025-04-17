@@ -143,3 +143,8 @@ Based on current index situation, review execution plan and provide optimization
 ```
 update t_admin_rms_zzjg set sfyx = '0' where xh = '1' is stuck, please analyze the cause
 ```
+
+5. Analyze the health status prompt as follows
+```
+Check the current health status of MySQL
+```

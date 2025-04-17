@@ -14,7 +14,7 @@ class GetTableName(BaseHandler):
 
     name = "get_table_name"
     description = (
-        "根据表注释、表描述搜索数据库中对应的表名"
+        "根据表注释、表描述搜索数据库中对应的表名(Search for table names in the database based on table comments and descriptions )"
     )
 
     def get_tool_description(self) -> Tool:

@@ -11,7 +11,7 @@ from .base import BaseHandler
 class ExecuteSQL(BaseHandler):
     name = "execute_sql"
     description = (
-        "在MySQL5.6s数据库上执行SQL"
+        "在MySQL5.6s数据库上执行SQL (multiple SQL execution, separated by ';')"
     )
 
     def get_tool_description(self) -> Tool:

@@ -14,7 +14,7 @@ execute_sql = ExecuteSQL()
 class GetTableLock(BaseHandler):
     name = "get_table_lock"
     description = (
-        "获取当前mysql服务器行级锁、表级锁情况"
+        "获取当前mysql服务器行级锁、表级锁情况(Check if there are row-level locks or table-level locks in the current MySQL server  )"
     )
 
     def get_tool_description(self) -> Tool:

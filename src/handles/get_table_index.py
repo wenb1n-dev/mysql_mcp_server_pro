@@ -12,7 +12,7 @@ from handles import (
 class GetTableIndex(BaseHandler):
     name = "get_table_index"
     description = (
-        "根据表名搜索数据库中对应的表索引,支持多表查询"
+        "根据表名搜索数据库中对应的表索引,支持多表查询(Search for table indexes in the database based on table names, supporting multi-table queries)"
     )
 
     def get_tool_description(self) -> Tool:

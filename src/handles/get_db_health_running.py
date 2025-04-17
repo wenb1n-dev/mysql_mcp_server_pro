@@ -14,7 +14,7 @@ execute_sql = ExecuteSQL()
 class GetDBHealthRunning(BaseHandler):
     name = "get_db_health_running"
     description = (
-        "获取当前mysql的健康状态"
+        "获取当前mysql的健康状态(Analyze MySQL health status )"
     )
 
     def get_tool_description(self) -> Tool:
