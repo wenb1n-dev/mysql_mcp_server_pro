@@ -12,6 +12,7 @@ mcp_mysql_server_pro 不仅止于mysql的增删改查功能，还包含了数据
 - 支持 sql执行计划分析
 - 支持 中文字段转拼音.
 - 支持 锁表分析
+- 支持 运行健康状态分析
 - 支持权限控制，只读（readonly）、读写（writer）、管理员（admin）
     ```
     "readonly": ["SELECT", "SHOW", "DESCRIBE", "EXPLAIN"],  # 只读权限
@@ -19,6 +20,19 @@ mcp_mysql_server_pro 不仅止于mysql的增删改查功能，还包含了数据
     "admin": ["SELECT", "SHOW", "DESCRIBE", "EXPLAIN", "INSERT", "UPDATE", "DELETE", 
              "CREATE", "ALTER", "DROP", "TRUNCATE"]  # 管理员权限
     ```
+
+## 工具列表
+| 工具名称                  | 描述                                                                                                                                 |
+|-----------------------|------------------------------------------------------------------------------------------------------------------------------------| 
+| execute_sql           | sql执行工具，根据权限配置可执行["SELECT", "SHOW", "DESCRIBE", "EXPLAIN", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP", "TRUNCATE"] 命令 |
+| get_chinese_initials  | 将中文字段名转换为拼音首字母字段                                                                                                                   |
+| get_db_health_running | 分析mysql的健康状态（连接情况、事务情况、运行情况、锁情况检测）                                                                                                 |
+| get_table_desc        | 根据表名搜索数据库中对应的表结构,支持多表查询                                                                                                            |
+| get_table_index       | 根据表名搜索数据库中对应的表索引,支持多表查询                                                                                                            |
+| get_table_lock        | 查询当前mysql服务器是否存在行级锁、表级锁情况                                                                                                          |
+| get_table_name        | 根据表注释、表描述搜索数据库中对应的表名                                                                                                               |
+
+
 
 ## 使用说明
 

@@ -12,6 +12,7 @@ mcp_mysql_server_pro is not just about MySQL CRUD operations, but also includes 
 - Supports SQL execution plan analysis
 - Supports Chinese field to pinyin conversion
 - Supports table lock analysis
+- Supports database health status analysis
 - Supports permission control with three roles: readonly, writer, and admin
     ```
     "readonly": ["SELECT", "SHOW", "DESCRIBE", "EXPLAIN"],  # Read-only permissions
@@ -19,6 +20,17 @@ mcp_mysql_server_pro is not just about MySQL CRUD operations, but also includes 
     "admin": ["SELECT", "SHOW", "DESCRIBE", "EXPLAIN", "INSERT", "UPDATE", "DELETE", 
              "CREATE", "ALTER", "DROP", "TRUNCATE"]  # Administrator permissions
     ```
+
+## Tool List
+| Tool Name              | Description                                                                                                                         |
+|-----------------------|------------------------------------------------------------------------------------------------------------------------------------| 
+| execute_sql           | SQL execution tool that can execute ["SELECT", "SHOW", "DESCRIBE", "EXPLAIN", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP", "TRUNCATE"] commands based on permission configuration |
+| get_chinese_initials  | Convert Chinese field names to pinyin initials                                                                                      |
+| get_db_health_running | Analyze MySQL health status (connection status, transaction status, running status, lock status detection)                          |
+| get_table_desc        | Search for table structures in the database based on table names, supporting multi-table queries                                    |
+| get_table_index       | Search for table indexes in the database based on table names, supporting multi-table queries                                       |
+| get_table_lock        | Check if there are row-level locks or table-level locks in the current MySQL server                                                |
+| get_table_name        | Search for table names in the database based on table comments and descriptions                                                    |
 
 ## Usage Instructions
 

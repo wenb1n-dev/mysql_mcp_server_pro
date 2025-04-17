@@ -9,11 +9,12 @@ from handles import (
     ExecuteSQL
 )
 
+execute_sql = ExecuteSQL()
 
 class GetTableLock(BaseHandler):
     name = "get_table_lock"
     description = (
-        "获取当前mysql服务器InnoDB 的行级锁"
+        "获取当前mysql服务器行级锁、表级锁情况"
     )
 
     def get_tool_description(self) -> Tool:
@@ -29,11 +30,32 @@ class GetTableLock(BaseHandler):
         )
 
     async def run_tool(self, arguments: Dict[str, Any]) -> Sequence[TextContent]:
+        use_result = await self.get_table_use(arguments)
+        lock_result = await self.get_table_lock(arguments)
+        
+        # 合并两个结果
+        combined_result = []
+        combined_result.extend(use_result)
+        combined_result.extend(lock_result)
+        
+        return combined_result
 
+    """
+        获取表级锁情况
+    """
+    async def get_table_use(self, arguments: Dict[str, Any]) -> Sequence[TextContent]:
         try:
+            sql = "SHOW OPEN TABLES WHERE In_use > 0;"
 
-            execute_sql = ExecuteSQL()
+            return await execute_sql.run_tool({"query": sql})
+        except Exception as e:
+            return [TextContent(type="text", text=f"执行查询时出错: {str(e)}")]
 
+    """
+        获取行级锁情况
+    """
+    async def get_table_lock(self, arguments: Dict[str, Any]) -> Sequence[TextContent]:
+        try:
             sql = "SELECT p2.`HOST` 被阻塞方host,  p2.`USER` 被阻塞方用户, r.trx_id 被阻塞方事务id, "
             sql += "r.trx_mysql_thread_id 被阻塞方线程号,TIMESTAMPDIFF(SECOND, r.trx_wait_started, CURRENT_TIMESTAMP) 等待时间, "
             sql += "r.trx_query 被阻塞的查询, l.lock_table 阻塞方锁住的表, m.`lock_mode` 被阻塞方的锁模式, "
@@ -55,6 +77,5 @@ class GetTableLock(BaseHandler):
             sql += "ORDER BY 等待时间 DESC;"
 
             return await execute_sql.run_tool({"query": sql})
-
         except Exception as e:
             return [TextContent(type="text", text=f"执行查询时出错: {str(e)}")]

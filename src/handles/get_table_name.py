@@ -14,7 +14,7 @@ class GetTableName(BaseHandler):
 
     name = "get_table_name"
     description = (
-        "根据表中文名搜索数据库中对应的表名"
+        "根据表注释、表描述搜索数据库中对应的表名"
     )
 
     def get_tool_description(self) -> Tool:
@@ -26,7 +26,7 @@ class GetTableName(BaseHandler):
                 "properties": {
                     "text": {
                         "type": "string",
-                        "description": "要搜索的表中文名"
+                        "description": "要搜索的表注释或表描述"
                     }
                 },
                 "required": ["text"]
@@ -34,7 +34,7 @@ class GetTableName(BaseHandler):
         )
 
     async def run_tool(self, arguments: Dict[str, Any]) -> Sequence[TextContent]:
-            """根据表的中文注释搜索数据库中的表名
+            """根据表的注释搜索数据库中的表名
 
             参数:
                 text (str): 要搜索的表中文注释关键词
