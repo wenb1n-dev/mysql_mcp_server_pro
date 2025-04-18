@@ -13,7 +13,7 @@ from handles import (
 class GetTableDesc(BaseHandler):
     name = "get_table_desc"
     description = (
-        "根据表名搜索数据库中对应的表结构,支持多表查询(Search for table structures in the database based on table names, supporting multi-table queries)"
+        "根据表名搜索数据库中对应的表字段,支持多表查询(Search for table structures in the database based on table names, supporting multi-table queries)"
     )
 
     def get_tool_description(self) -> Tool:
