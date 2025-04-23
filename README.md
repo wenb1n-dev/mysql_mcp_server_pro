@@ -22,15 +22,16 @@ mcp_mysql_server_pro is not just about MySQL CRUD operations, but also includes 
     ```
 
 ## Tool List
-| Tool Name              | Description                                                                                                                         |
-|-----------------------|------------------------------------------------------------------------------------------------------------------------------------| 
-| execute_sql           | SQL execution tool that can execute ["SELECT", "SHOW", "DESCRIBE", "EXPLAIN", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP", "TRUNCATE"] commands based on permission configuration |
-| get_chinese_initials  | Convert Chinese field names to pinyin initials                                                                                      |
-| get_db_health_running | Analyze MySQL health status (connection status, transaction status, running status, lock status detection)                          |
-| get_table_desc        | Search for table structures in the database based on table names, supporting multi-table queries                                    |
-| get_table_index       | Search for table indexes in the database based on table names, supporting multi-table queries                                       |
-| get_table_lock        | Check if there are row-level locks or table-level locks in the current MySQL server                                                |
-| get_table_name        | Search for table names in the database based on table comments and descriptions                                                    |
+| Tool Name                  | Description                                                                                                                                                                                                              |
+|----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
+| execute_sql                | SQL execution tool that can execute ["SELECT", "SHOW", "DESCRIBE", "EXPLAIN", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP", "TRUNCATE"] commands based on permission configuration                            |
+| get_chinese_initials       | Convert Chinese field names to pinyin initials                                                                                                                                                                           |
+| get_db_health_running      | Analyze MySQL health status (connection status, transaction status, running status, lock status detection)                                                                                                               |
+| get_table_desc             | Search for table structures in the database based on table names, supporting multi-table queries                                                                                                                         |
+| get_table_index            | Search for table indexes in the database based on table names, supporting multi-table queries                                                                                                                            |
+| get_table_lock             | Check if there are row-level locks or table-level locks in the current MySQL server                                                                                                                                      |
+| get_table_name             | Search for table names in the database based on table comments and descriptions                                                                                                                                          |
+| get_db_health_index_usage  | Get the index usage of the currently connected mysql database, including redundant index situations, poorly performing index situations, and the top 5 unused index situations with query times greater than 30 seconds  | 
 
 ## Usage Instructions
 

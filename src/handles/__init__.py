@@ -5,6 +5,7 @@ from .get_table_index import GetTableIndex
 from .get_table_lock import GetTableLock
 from .get_table_name import GetTableName
 from .get_db_health_running import GetDBHealthRunning
+from .get_db_health_index_usage import GetDBHealthIndexUsage
 
 __all__ = [
     "ExecuteSQL",
@@ -13,5 +14,6 @@ __all__ = [
     "GetTableIndex",
     "GetTableLock",
     "GetTableName",
-    "GetDBHealthRunning"
+    "GetDBHealthRunning",
+    "GetDBHealthIndexUsage"
 ]
