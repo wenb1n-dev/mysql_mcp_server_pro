@@ -167,21 +167,27 @@ update t_admin_rms_zzjg set sfyx = '0' where xh = '1' 卡死了，请分析原�
 
 ## prompt 调用示例
 1.  mysql 分析prompt 调用示例
-   step1: 选择 analyzing-mysql-prompt
+   - step1: 选择 analyzing-mysql-prompt
+
    ![image](https://github.com/user-attachments/assets/3be1ad59-2b1e-452b-bef4-564f0a754e74)
 
-   step2: 自动生成对应prompt
+   - step2: 自动生成对应prompt
+
    ![image](https://github.com/user-attachments/assets/9438dba0-c003-4d14-bfe8-401f32f71b07)
 
-   step3: 开始问答
+   - step3: 开始问答
+
    ![image](https://github.com/user-attachments/assets/9eefbb82-794d-4cb2-82e1-4debe237d86a)
 
 2. 表数据查询 prompt 调用示例
-   step1: 选择 query-table-data-prompt
+   - step1: 选择 query-table-data-prompt
+   
    ![image](https://github.com/user-attachments/assets/768ff4cc-be89-42b0-802f-4e41f105db11)
 
-   step2: 输入问题描述（可选），不输入则会初始化为mysql数据查询助手
+   - step2: 输入问题描述（可选），不输入则会初始化为mysql数据查询助手
+   
    ![image](https://github.com/user-attachments/assets/968e7cfd-4dfe-47b5-9fc3-49cbf07a7a78)
+
    ![image](https://github.com/user-attachments/assets/3e1f80c1-2cff-471a-997a-94b8104e1b9b)
 
    

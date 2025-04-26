@@ -20,6 +20,7 @@ mcp_mysql_server_pro is not just about MySQL CRUD operations, but also includes 
     "admin": ["SELECT", "SHOW", "DESCRIBE", "EXPLAIN", "INSERT", "UPDATE", "DELETE", 
              "CREATE", "ALTER", "DROP", "TRUNCATE"]  # Administrator permissions
     ```
+- Supports prompt template invocation
 
 ## Tool List
 | Tool Name                  | Description                                                                                                                                                                                                              |
@@ -32,6 +33,12 @@ mcp_mysql_server_pro is not just about MySQL CRUD operations, but also includes 
 | get_table_lock             | Check if there are row-level locks or table-level locks in the current MySQL server                                                                                                                                      |
 | get_table_name             | Search for table names in the database based on table comments and descriptions                                                                                                                                          |
 | get_db_health_index_usage  | Get the index usage of the currently connected mysql database, including redundant index situations, poorly performing index situations, and the top 5 unused index situations with query times greater than 30 seconds  | 
+
+## Prompt List
+| Prompt Name                | Description                                                                                                                           |
+|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------| 
+| analyzing-mysql-prompt    | This is a prompt for analyzing MySQL-related issues                                                                                    |
+| query-table-data-prompt   | This is a prompt for querying table data using tools. If description is empty, it will be initialized as a MySQL database query assistant |
 
 ## Usage Instructions
 
