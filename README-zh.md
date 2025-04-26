@@ -20,6 +20,7 @@ mcp_mysql_server_pro 不仅止于mysql的增删改查功能，还包含了数据
     "admin": ["SELECT", "SHOW", "DESCRIBE", "EXPLAIN", "INSERT", "UPDATE", "DELETE", 
              "CREATE", "ALTER", "DROP", "TRUNCATE"]  # 管理员权限
     ```
+- 支持 prompt 模版调用
 
 ## 工具列表
 | 工具名称                  | 描述                                                                                                                                 |
@@ -33,7 +34,11 @@ mcp_mysql_server_pro 不仅止于mysql的增删改查功能，还包含了数据
 | get_table_name        | 根据表注释、表描述搜索数据库中对应的表名                                                                                                               |
 | get_db_health_index_usage | 获取当前连接的mysql库的索引使用情况,包含冗余索引情况、性能较差的索引情况、未使用索引且查询时间大于30秒top5情况|
 
-
+## prompt 列表
+| prompt名称                   | 描述                                                                                                                                 |
+|----------------------------|------------------------------------------------------------------------------------------------------------------------------------| 
+| analyzing-mysql-prompt     | 这是分析mysql相关问题的提示词       |
+| query-table-data-prompt    | 这是通过调用工具查询表数据的提示词，描述可以为空，空时则会初始化为mysql数据库数据查询助手  |
 
 ## 使用说明
 
@@ -115,7 +120,7 @@ mcp json 如下
 2. 在__init__.py中引入新工具即可在server中调用
 
 
-## 示例
+## 工具调用示例
 1. 创建新表以及插入数据 prompt格式如下
 ```
 # 任务
@@ -130,11 +135,15 @@ mcp json 如下
  - 每个字段需要添加注释，表注释也需要
  - 创建完成后生成5条真实数据
 ```
+![image](https://github.com/user-attachments/assets/8a07007f-7375-4fb3-b69e-7ef9ffd68044)
+
 
 2. 根据表注释查询数据 prompt如下
 ```
 查询用户信息表中张三的数据
 ```
+![image](https://github.com/user-attachments/assets/fb57aae3-1e50-4bc8-98d9-36e377cc9722)
+
 
 3. 分析慢sql prompt如下
 ```
@@ -147,10 +156,35 @@ left join t_jcsjzx_hjkq_jcd jcd on jcd.cddm = xsz.cddm
 ```
 update t_admin_rms_zzjg set sfyx = '0' where xh = '1' 卡死了，请分析原因
 ```
+![image](https://github.com/user-attachments/assets/e99576f0-a50f-457c-ad48-9e9c45391b89)
+
 
 5. 分析健康状态 prompt如下
 ```
 检测mysql当前的健康状态
 ```
+![image](https://github.com/user-attachments/assets/156d91be-3140-4cf2-9456-c24eb268a0f0)
+
+## prompt 调用示例
+1.  mysql 分析prompt 调用示例
+   step1: 选择 analyzing-mysql-prompt
+   ![image](https://github.com/user-attachments/assets/3be1ad59-2b1e-452b-bef4-564f0a754e74)
+
+   step2: 自动生成对应prompt
+   ![image](https://github.com/user-attachments/assets/9438dba0-c003-4d14-bfe8-401f32f71b07)
+
+   step3: 开始问答
+   ![image](https://github.com/user-attachments/assets/9eefbb82-794d-4cb2-82e1-4debe237d86a)
+
+2. 表数据查询 prompt 调用示例
+   step1: 选择 query-table-data-prompt
+   ![image](https://github.com/user-attachments/assets/768ff4cc-be89-42b0-802f-4e41f105db11)
+
+   step2: 输入问题描述（可选），不输入则会初始化为mysql数据查询助手
+   ![image](https://github.com/user-attachments/assets/968e7cfd-4dfe-47b5-9fc3-49cbf07a7a78)
+   ![image](https://github.com/user-attachments/assets/3e1f80c1-2cff-471a-997a-94b8104e1b9b)
+
+   
+
 
 
