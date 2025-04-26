@@ -5,15 +5,45 @@ from typing import Sequence
 from mcp.server.sse import SseServerTransport
 
 from mcp.server import Server
-from mcp.types import  Tool, TextContent
+from mcp.types import Tool, TextContent, Prompt, GetPromptResult
 
 from starlette.applications import Starlette
 from starlette.routing import Route, Mount
 
 from handles.base import ToolRegistry
+from prompts.BasePrompt import PromptRegistry
 
 # 初始化服务器
 app = Server("operateMysql")
+
+@app.list_prompts()
+async def handle_list_prompts() -> list[Prompt]:
+    """获取所有可用的提示模板列表
+    
+    返回:
+        list[Prompt]: 返回系统中注册的所有提示模板列表
+    """
+    return PromptRegistry.get_all__prompts()
+
+
+@app.get_prompt()
+async def handle_get_prompt(name: str, arguments: dict[str, str] | None) -> GetPromptResult:
+    """获取并执行指定的提示模板
+    
+    参数:
+        name (str): 提示模板的名称
+        arguments (dict[str, str] | None): 提示模板所需的参数字典，可以为空
+        
+    返回:
+        GetPromptResult: 提示模板执行的结果
+        
+    说明:
+        1. 根据提供的模板名称从注册表中获取对应的提示模板
+        2. 使用提供的参数执行该模板
+        3. 返回执行结果
+    """
+    prompt = PromptRegistry.get_prompt(name)
+    return await prompt.run_prompt(arguments)
 
 
 @app.list_tools()
