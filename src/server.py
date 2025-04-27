@@ -1,7 +1,7 @@
 import asyncio
 import uvicorn
 
-from typing import Sequence
+from typing import Sequence, Dict, Any
 from mcp.server.sse import SseServerTransport
 
 from mcp.server import Server
@@ -27,7 +27,7 @@ async def handle_list_prompts() -> list[Prompt]:
 
 
 @app.get_prompt()
-async def handle_get_prompt(name: str, arguments: dict[str, str] | None) -> GetPromptResult:
+async def handle_get_prompt(name: str, arguments: Dict[str, Any] | None) -> GetPromptResult:
     """获取并执行指定的提示模板
     
     参数:
@@ -54,7 +54,7 @@ async def list_tools() -> list[Tool]:
     return ToolRegistry.get_all_tools()
 
 @app.call_tool()
-async def call_tool(name: str, arguments: dict) -> Sequence[TextContent]:
+async def call_tool(name: str, arguments: Dict[str, Any]) -> Sequence[TextContent]:
     """调用指定的工具执行操作
     
     Args:
