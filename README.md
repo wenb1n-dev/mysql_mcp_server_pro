@@ -125,15 +125,14 @@ mcp json as follows:
 # Task
    Create an organizational structure table with the following structure: department name, department number, parent department, is valid.
 # Requirements
- - Table name: t_admin_rms_zzjg
- - Field requirements: string type uses 'varchar(255)', integer type uses 'int', float type uses 'float', date and time type uses 'datetime', boolean type uses 'boolean', text type uses 'text', large text type uses 'longtext', large integer type uses 'bigint', large float type uses 'double'
- - Table header needs to include primary key field, serial number XH varchar(255)
- - Table must include these fixed fields at the end: creator-CJR varchar(50), creation time-CJSJ datetime, modifier-XGR varchar(50), modification time-XGSJ datetime
- - Field naming should use tool return content
+ - Table name: department
  - Common fields need indexes
  - Each field needs comments, table needs comment
  - Generate 5 real data records after creation
 ```
+![image](https://github.com/user-attachments/assets/34118993-2a4c-4804-92f8-7fba9df89190)
+![image](https://github.com/user-attachments/assets/f8299f01-c321-4dbf-b5de-13ba06885cc1)
+
 
 2. Query data based on table comments, prompt as follows:
 ```
