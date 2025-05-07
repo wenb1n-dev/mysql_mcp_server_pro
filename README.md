@@ -136,8 +136,10 @@ mcp json as follows:
 
 2. Query data based on table comments, prompt as follows:
 ```
-Query Zhang San's data from the user information table
+Search for data with Department name 'Executive Office' in Department organizational structure table
 ```
+![image](https://github.com/user-attachments/assets/dcf96603-548e-42d9-9217-78e569be7a8d)
+
 
 3. Analyze slow SQL, prompt as follows:
 ```
@@ -155,3 +157,5 @@ update t_admin_rms_zzjg set sfyx = '0' where xh = '1' is stuck, please analyze t
 ```
 Check the current health status of MySQL
 ```
+![image](https://github.com/user-attachments/assets/c3d08cae-0529-436f-bac1-801edd0c5b74)
+
