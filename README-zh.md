@@ -101,7 +101,7 @@ mysql_mcp_server_sse
 ```
 
 4. 在mcp 客户端配置上。详细看下方的sse启动
-http://localhost:9000/sse
+
 
 
 注意：

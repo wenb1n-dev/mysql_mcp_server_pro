@@ -69,6 +69,7 @@ mysql_mcp_server_sse
 ```
 
 4. mcp client
+
 go to see see “Use uv to start the service”
 ^_^
 
