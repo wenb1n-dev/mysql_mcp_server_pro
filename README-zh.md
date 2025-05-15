@@ -97,10 +97,10 @@ MYSQL_ROLE=readonly
 3. 运行服务
 ```bash
 # SSE 模式
-mysql-mcp-server
+mysql-mcp-server-sse
 
 # 或者 STDIO 模式
-mysql-mcp-server-stdio
+mysql-mcp-server-pro
 ```
 
 注意：

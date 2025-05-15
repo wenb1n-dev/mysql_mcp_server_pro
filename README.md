@@ -64,10 +64,10 @@ MYSQL_ROLE=readonly
 3. Run Service
 ```bash
 # SSE mode
-mysql-mcp-server
+mysql-mcp-server-sse
 
 # Or STDIO mode
-mysql-mcp-server-stdio
+mysql-mcp-server-pro
 ```
 
 Note:
