@@ -66,9 +66,12 @@ MYSQL_ROLE=readonly
 # SSE mode
 mysql_mcp_server_sse
 
-# Or STDIO mode
-mysql_mcp_server_pro
 ```
+
+4. mcp client
+go to see see “Use uv to start the service”
+^_^
+
 
 Note:
 - The `.env` file should be placed in the directory where you run the command

@@ -98,10 +98,11 @@ MYSQL_ROLE=readonly
 ```bash
 # SSE 模式
 mysql_mcp_server_sse
-
-# 或者 STDIO 模式
-mysql_mcp_server_pro
 ```
+
+4. 在mcp 客户端配置上。详细看下方的sse启动
+http://localhost:9000/sse
+
 
 注意：
 - `.env` 文件应该放在运行命令的目录下
@@ -110,6 +111,7 @@ mysql_mcp_server_pro
 
 
 ### 使用 uvx 运行，客户端配置
+- 该方式直接在支持mcp 客户端上配置即可，无需下载源码。如通义千问插件，trae编辑工具等
 ```
 {
 	"mcpServers": {
