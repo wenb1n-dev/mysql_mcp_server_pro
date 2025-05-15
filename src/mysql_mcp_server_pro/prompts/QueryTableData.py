@@ -3,7 +3,7 @@ from typing import Dict, Any
 from mcp import GetPromptResult
 from mcp.types import Prompt, TextContent, PromptMessage, PromptArgument
 
-from prompts.BasePrompt import BasePrompt
+from mysql_mcp_server_pro.prompts.BasePrompt import BasePrompt
 
 
 class QueryTableData(BasePrompt):

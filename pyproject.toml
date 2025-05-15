@@ -1,14 +1,38 @@
 [project]
-name = "sse-mcp"
-version = "0.1.0"
-description = "Add your description here"
+name = "mysql_mcp_server_pro"
+version = "0.0.3"
+license = { text = "MIT" }
+description = "Support for SSE, STDIO in MySQL MCP server, includes CRUD, database anomaly analysis capabilities .支持SSE，STDIO；不仅止于mysql的增删改查功能； 还包含了数据库异常分析能力；且便于开发者们进行个性化的工具扩展"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
-    "mcp>=1.0.0",
+    "mcp>=1.8.0",
     "mysql-connector-python>=9.2.0",
     "pypinyin>=0.54.0",
     "python-dotenv>=1.1.0",
     "starlette>=0.46.1",
     "uvicorn>=0.34.0",
 ]
+
+[[project.authors]]
+name = "wenb1n"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+mysql-mcp-server = "mysql_mcp_server_pro.server:main"
+mysql-mcp-server-stdio = "mysql_mcp_server_pro.cli:stdio_entry"
+mysql-mcp-server-sse = "mysql_mcp_server_pro.cli:sse_entry"
+
+[tool.hatch.build]
+packages = ["src"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mysql_mcp_server_pro"]
+
+[project.urls]
+Homepage = "https://github.com/wenb1n-dev/mysql_mcp_server_pro"
+Documentation = "https://github.com/wenb1n-dev/mysql_mcp_server_pro/blob/main/README.md"
+Repository = "https://github.com/wenb1n-dev/mysql_mcp_server_pro.git"

@@ -1,4 +1,4 @@
-mcp>=1.0.0
+mcp>=1.8.0
 mysql-connector-python>=9.1.0
 pypinyin>=0.48.0
 uvicorn>=0.24.0

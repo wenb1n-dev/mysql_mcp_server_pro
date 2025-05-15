@@ -42,7 +42,41 @@ mcp_mysql_server_pro is not just about MySQL CRUD operations, but also includes 
 
 ## Usage Instructions
 
-### SSE Mode
+### Installation and Configuration
+1. Install Package
+```bash
+pip install mysql-mcp-server-pro
+```
+
+2. Configure Environment Variables
+Create a `.env` file with the following content:
+```bash
+# MySQL Database Configuration
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_USER=your_username
+MYSQL_PASSWORD=your_password
+MYSQL_DATABASE=your_database
+# Optional, default is 'readonly'. Available values: readonly, writer, admin
+MYSQL_ROLE=readonly
+```
+
+3. Run Service
+```bash
+# SSE mode
+mysql-mcp-server
+
+# Or STDIO mode
+mysql-mcp-server-stdio
+```
+
+Note:
+- The `.env` file should be placed in the directory where you run the command
+- You can also set these variables directly in your environment
+- Make sure the database configuration is correct and can connect
+
+
+### Local Development with SSE Mode
 
 - Use uv to start the service
 
@@ -79,10 +113,10 @@ Start commands:
 uv sync
 
 # Start
-uv run server.py
+uv run src/mysql_mcp_server_pro/server.py
 ```
 
-### STDIO Mode
+### Local Development with STDIO Mode
 
 Add the following content to your mcp client tools, such as cursor, cline, etc.
 

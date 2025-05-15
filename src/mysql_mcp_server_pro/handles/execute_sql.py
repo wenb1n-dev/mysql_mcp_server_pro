@@ -4,8 +4,8 @@ from mcp import Tool
 from mcp.types import TextContent
 from mysql.connector import connect, Error
 
-from config import get_db_config, get_role_permissions
 from .base import BaseHandler
+from ..config import get_db_config, get_role_permissions
 
 
 class ExecuteSQL(BaseHandler):

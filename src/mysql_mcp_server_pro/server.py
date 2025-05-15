@@ -10,8 +10,9 @@ from mcp.types import Tool, TextContent, Prompt, GetPromptResult
 from starlette.applications import Starlette
 from starlette.routing import Route, Mount
 
-from handles.base import ToolRegistry
-from prompts.BasePrompt import PromptRegistry
+
+from .handles.base import ToolRegistry
+from .prompts.BasePrompt import PromptRegistry
 
 # 初始化服务器
 app = Server("operateMysql")
@@ -122,13 +123,32 @@ def run_sse():
     uvicorn.run(starlette_app, host="0.0.0.0", port=9000)
 
 
-if __name__ == "__main__":
-    import sys
 
-    # 根据命令行参数选择启动模式
+def main(mode="sse"):
+    """
+    主入口函数，用于命令行启动
+    支持两种模式：
+    1. SSE 模式（默认）：mysql-mcp-server
+    2. stdio 模式：mysql-mcp-server --stdio
+    
+    Args:
+        mode (str): 运行模式，可选值为 "sse" 或 "stdio"
+    """
+    import sys
+    
+    # 命令行参数优先级高于默认参数
     if len(sys.argv) > 1 and sys.argv[1] == "--stdio":
         # 标准输入输出模式
         asyncio.run(run_stdio())
-    else:
-        # 默认 SSE 模式
+    elif len(sys.argv) > 1 and sys.argv[1] == "--sse":
+        # SSE 模式
         run_sse()
+    else:
+        # 使用传入的默认模式
+        if mode == "stdio":
+            asyncio.run(run_stdio())
+        else:
+            run_sse()
+
+if __name__ == "__main__":
+    main()

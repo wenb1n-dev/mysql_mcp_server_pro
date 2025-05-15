@@ -6,8 +6,41 @@
 ## 介绍
 mcp_mysql_server_pro 不仅止于mysql的增删改查功能，还包含了数据库异常分析能力，且便于开发者们进行个性化的工具扩展
 
+## 安装和配置
+1. 安装包
+```bash
+pip install mysql-mcp-server-pro
+```
+
+2. 配置环境变量
+创建一个 `.env` 文件，内容如下：
+```bash
+# MySQL数据库配置
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_USER=your_username
+MYSQL_PASSWORD=your_password
+MYSQL_DATABASE=your_database
+# 可选值: readonly, writer, admin，默认为 readonly
+MYSQL_ROLE=readonly
+```
+
+3. 运行服务
+```bash
+# SSE 模式
+mysql-mcp-server
+
+# 或者 STDIO 模式
+mysql-mcp-server-stdio
+```
+
+注意：
+- `.env` 文件应该放在运行命令的目录下
+- 也可以直接在环境中设置这些变量
+- 确保数据库配置正确且可以连接
+
 - 支持 STDIO 方式 与 SSE 方式
-- 支持 支持多sql执行，以“;”分隔。 
+- 支持 支持多sql执行，以";"分隔。 
 - 支持 根据表注释可以查询出对于的数据库表名，表字段
 - 支持 sql执行计划分析
 - 支持 中文字段转拼音.
@@ -42,7 +75,41 @@ mcp_mysql_server_pro 不仅止于mysql的增删改查功能，还包含了数据
 
 ## 使用说明
 
-### SSE 方式
+### pip安装和配置
+1. 安装包
+```bash
+pip install mysql-mcp-server-pro
+```
+
+2. 配置环境变量
+创建一个 `.env` 文件，内容如下：
+```bash
+# MySQL数据库配置
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_USER=your_username
+MYSQL_PASSWORD=your_password
+MYSQL_DATABASE=your_database
+# 可选值: readonly, writer, admin，默认为 readonly
+MYSQL_ROLE=readonly
+```
+
+3. 运行服务
+```bash
+# SSE 模式
+mysql-mcp-server
+
+# 或者 STDIO 模式
+mysql-mcp-server-stdio
+```
+
+注意：
+- `.env` 文件应该放在运行命令的目录下
+- 也可以直接在环境中设置这些变量
+- 确保数据库配置正确且可以连接
+
+
+### 本地开发 SSE 方式
 
 - 使用 uv 启动服务
 
@@ -79,10 +146,10 @@ MYSQL_ROLE=admin
 uv sync
 
 # 启动
-uv run server.py
+uv run src/mysql_mcp_server_pro/server.py
 ```
 
-### STDIO 方式 
+### 本地开发 STDIO 方式 
 
 将以下内容添加到你的 mcp client 工具中，例如cursor、cline等
 

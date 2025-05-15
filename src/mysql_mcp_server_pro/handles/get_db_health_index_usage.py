@@ -4,8 +4,8 @@ from mcp import Tool
 from mcp.types import TextContent
 
 from .base import BaseHandler
-from config import get_db_config
-from handles import (
+from mysql_mcp_server_pro.config import get_db_config
+from mysql_mcp_server_pro.handles import (
     ExecuteSQL
 )
 

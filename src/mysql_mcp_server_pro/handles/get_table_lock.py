@@ -5,7 +5,7 @@ from mcp.types import TextContent
 
 from .base import BaseHandler
 
-from handles import (
+from mysql_mcp_server_pro.handles import (
     ExecuteSQL
 )
 
