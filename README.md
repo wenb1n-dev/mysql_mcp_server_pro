@@ -113,7 +113,7 @@ Start commands:
 uv sync
 
 # Start
-uv run src/mysql_mcp_server_pro/server.py
+uv run -m mysql_mcp_server_pro.server 
 ```
 
 ### Local Development with STDIO Mode

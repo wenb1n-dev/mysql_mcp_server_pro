@@ -146,7 +146,7 @@ MYSQL_ROLE=admin
 uv sync
 
 # 启动
-uv run src/mysql_mcp_server_pro/server.py
+uv run -m mysql_mcp_server_pro.server 
 ```
 
 ### 本地开发 STDIO 方式 
