@@ -78,7 +78,7 @@ mysql-mcp-server-stdio
 ### pip安装和配置
 1. 安装包
 ```bash
-pip install mysql-mcp-server-pro
+pip install mysql_mcp_server_pro
 ```
 
 2. 配置环境变量
@@ -97,16 +97,42 @@ MYSQL_ROLE=readonly
 3. 运行服务
 ```bash
 # SSE 模式
-mysql-mcp-server-sse
+mysql_mcp_server_sse
 
 # 或者 STDIO 模式
-mysql-mcp-server-pro
+mysql_mcp_server_pro
 ```
 
 注意：
 - `.env` 文件应该放在运行命令的目录下
 - 也可以直接在环境中设置这些变量
 - 确保数据库配置正确且可以连接
+
+
+### 使用 uvx 运行，客户端配置
+```
+{
+	"mcpServers": {
+		"mysql": {
+			"command": "uvx",
+			"args": [
+				"--from",
+				"mysql_mcp_server_pro",
+				"mysql_mcp_server_pro"
+			],
+			"env": {
+				"MYSQL_HOST": "192.168.x.xxx",
+				"MYSQL_PORT": "3306",
+				"MYSQL_USER": "root",
+				"MYSQL_PASSWORD": "root",
+				"MYSQL_DATABASE": "a_llm",
+				"MYSQL_ROLE": "admin"
+			}
+		}
+	}
+}
+
+```
 
 
 ### 本地开发 SSE 方式

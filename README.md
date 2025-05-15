@@ -45,7 +45,7 @@ mcp_mysql_server_pro is not just about MySQL CRUD operations, but also includes 
 ### Installation and Configuration
 1. Install Package
 ```bash
-pip install mysql-mcp-server-pro
+pip install mysql_mcp_server_pro
 ```
 
 2. Configure Environment Variables
@@ -64,10 +64,10 @@ MYSQL_ROLE=readonly
 3. Run Service
 ```bash
 # SSE mode
-mysql-mcp-server-sse
+mysql_mcp_server_sse
 
 # Or STDIO mode
-mysql-mcp-server-pro
+mysql_mcp_server_pro
 ```
 
 Note:
@@ -75,6 +75,29 @@ Note:
 - You can also set these variables directly in your environment
 - Make sure the database configuration is correct and can connect
 
+### Run with uvx, Client Configuration
+```json
+{
+    "mcpServers": {
+        "mysql": {
+            "command": "uvx",
+            "args": [
+                "--from",
+                "mysql_mcp_server_pro",
+                "mysql_mcp_server_pro"
+            ],
+            "env": {
+                "MYSQL_HOST": "192.168.x.xxx",
+                "MYSQL_PORT": "3306",
+                "MYSQL_USER": "root",
+                "MYSQL_PASSWORD": "root",
+                "MYSQL_DATABASE": "a_llm",
+                "MYSQL_ROLE": "admin"
+            }
+        }
+    }
+}
+```
 
 ### Local Development with SSE Mode
 
@@ -191,5 +214,3 @@ update t_admin_rms_zzjg set sfyx = '0' where xh = '1' is stuck, please analyze t
 ```
 Check the current health status of MySQL
 ```
-![image](https://github.com/user-attachments/assets/c3d08cae-0529-436f-bac1-801edd0c5b74)
-
