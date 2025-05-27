@@ -158,22 +158,23 @@ mcp json 如下
         "command": "uv",
         "args": [
           "--directory",
-          "G:\\python\\mysql_mcp\\src",  # 这里需要替换为你的项目路径
+          "/Volumes/mysql_mcp_server_pro/src/mysql_mcp_server_pro",    # 这里需要替换为你的项目路径
           "run",
-          "server.py",
+          "-m",
+          "mysql_mcp_server_pro.server",
           "--stdio"
         ],
         "env": {
-          "MYSQL_HOST": "192.168.xxx.xxx",
+          "MYSQL_HOST": "localhost",
           "MYSQL_PORT": "3306",
-          "MYSQL_USER": "root",
-          "MYSQL_PASSWORD": "root",
+          "MYSQL_USER": "root", 
+          "MYSQL_PASSWORD": "123456",
           "MYSQL_DATABASE": "a_llm",
           "MYSQL_ROLE": "admin"
        }
     }
   }
-}    
+}  
 ```
 
 ## 个性扩展工具

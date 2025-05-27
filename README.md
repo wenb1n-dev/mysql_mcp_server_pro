@@ -157,22 +157,24 @@ mcp json as follows:
         "command": "uv",
         "args": [
           "--directory",
-          "G:\\python\\mysql_mcp\\src",  # Replace this with your project path
+          "/Volumes/mysql_mcp_server_pro/src/mysql_mcp_server_pro",    # Replace this with your project path
           "run",
-          "server.py",
+          "-m",
+          "mysql_mcp_server_pro.server",
           "--stdio"
         ],
         "env": {
-          "MYSQL_HOST": "192.168.xxx.xxx",
+          "MYSQL_HOST": "localhost",
           "MYSQL_PORT": "3306",
-          "MYSQL_USER": "root",
-          "MYSQL_PASSWORD": "root",
+          "MYSQL_USER": "root", 
+          "MYSQL_PASSWORD": "123456",
           "MYSQL_DATABASE": "a_llm",
-          "MYSQL_ROLE": "readonly"  # Optional, default is 'readonly'. Available values: readonly, writer, admin
+          "MYSQL_ROLE": "admin" # Optional, default is 'readonly'. Available values: readonly, writer, admin
+
        }
     }
   }
-}    
+}  
 ```
 
 ## Custom Tool Extensions

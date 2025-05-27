@@ -53,7 +53,7 @@ class GetDBHealthIndexUsage(BaseHandler):
     """
     async def get_count_zero(self, arguments: Dict[str, Any]) -> Sequence[TextContent]:
         try:
-            sql = "SELECT object_name,index_name,count_star from PERFORMANCE_SCHEMA.table_io_waits_summary_by_index_usage "
+            sql = "SELECT object_name,index_name,count_star from performance_schema.table_io_waits_summary_by_index_usage "
             sql += f"WHERE object_schema = '{config['database']}' and count_star = 0 AND sum_timer_wait = 0 ;"
 
             return await execute_sql.run_tool({"query": sql})
@@ -67,7 +67,7 @@ class GetDBHealthIndexUsage(BaseHandler):
     async def get_max_timer(self, arguments: Dict[str, Any]) -> Sequence[TextContent]:
         try:
             sql = "SELECT object_schema,object_name,index_name,(max_timer_wait / 1000000000000) max_timer_wait "
-            sql += f"FROM PERFORMANCE_SCHEMA.table_io_waits_summary_by_index_usage where object_schema = '{config['database']}' "
+            sql += f"FROM performance_schema.table_io_waits_summary_by_index_usage where object_schema = '{config['database']}' "
             sql += "and index_name is not null ORDER BY  max_timer_wait DESC;"
 
             return await execute_sql.run_tool({"query": sql})
@@ -80,7 +80,7 @@ class GetDBHealthIndexUsage(BaseHandler):
     async def get_not_used_index(self, arguments: Dict[str, Any]) -> Sequence[TextContent]:
         try:
             sql = "SELECT object_schema,object_name, (max_timer_wait / 1000000000000) max_timer_wait "
-            sql += f"FROM PERFORMANCE_SCHEMA.table_io_waits_summary_by_index_usage where object_schema = '{config['database']}' "
+            sql += f"FROM performance_schema.table_io_waits_summary_by_index_usage where object_schema = '{config['database']}' "
             sql += "and index_name IS null and max_timer_wait > 30000000000000 ORDER BY max_timer_wait DESC limit 5;"
 
             return await execute_sql.run_tool({"query": sql})

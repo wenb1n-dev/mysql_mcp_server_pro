@@ -84,6 +84,9 @@ class GetDBHealthRunning(BaseHandler):
     async def get_lock(self, arguments: Dict[str, Any]) -> Sequence[TextContent]:
         try:
             sql = "SHOW OPEN TABLES WHERE In_use > 0;select * from information_schema.innodb_locks;select * from information_schema.innodb_lock_waits;"
+            sql += "select * from performance_schema.data_lock_waits;"
+            sql += "select * from performance_schema.data_locks;"
+
 
             return await execute_sql.run_tool({"query": sql})
         except Exception as e:
