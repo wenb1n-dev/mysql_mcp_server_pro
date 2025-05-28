@@ -215,8 +215,11 @@ Based on current index situation, review execution plan and provide optimization
 ```
 update t_admin_rms_zzjg set sfyx = '0' where xh = '1' is stuck, please analyze the cause
 ```
+![image](https://github.com/user-attachments/assets/25bca1cd-854c-4591-ac6e-32d464b12066)
+
 
 5. Analyze the health status prompt as follows
 ```
 Check the current health status of MySQL
 ```
+![image](https://github.com/user-attachments/assets/1f221ab8-59bf-402c-a15a-ec3eba1eea59)
