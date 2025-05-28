@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  mysql-mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mysql-mcp-server
+    ports:
+      - "9000:9000"  # 如果你的应用监听 9000 端口，请根据实际情况调整
+    environment:
+      MYSQL_HOST: ${MYSQL_HOST:-localhost}
+      MYSQL_PORT: ${MYSQL_PORT:-3306}
+      MYSQL_USER: ${MYSQL_USER:-root}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-123456}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-a_llm}
+      MYSQL_ROLE: ${MYSQL_ROLE:-admin}
+      PYTHONPATH: /app/src
+    restart: unless-stopped
+    command: ["python", "-m", "mysql_mcp_server_pro.server"]
