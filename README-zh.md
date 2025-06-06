@@ -1,7 +1,7 @@
 [![简体中文](https://img.shields.io/badge/简体中文-点击查看-orange)](README-zh.md)
 [![English](https://img.shields.io/badge/English-Click-yellow)](README.md)
 
-# mcp_mysql_server
+# mcp_mysql_server_pro
 #### 帮忙点个赞啊，朋友们。
 ## 介绍
 mcp_mysql_server_pro 不仅止于mysql的增删改查功能，还包含了数据库异常分析能力，且便于开发者们进行个性化的工具扩展

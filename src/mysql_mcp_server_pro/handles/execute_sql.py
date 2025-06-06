@@ -11,7 +11,7 @@ from ..config import get_db_config, get_role_permissions
 class ExecuteSQL(BaseHandler):
     name = "execute_sql"
     description = (
-        "在MySQL5.6s数据库上执行SQL (multiple SQL execution, separated by ';')"
+        "在MySQL数据库上执行SQL (multiple SQL execution, separated by ';')"
     )
 
     def get_tool_description(self) -> Tool:
