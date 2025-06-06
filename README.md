@@ -6,7 +6,7 @@
 ## Introduction
 mcp_mysql_server_pro is not just about MySQL CRUD operations, but also includes database anomaly analysis capabilities and makes it easy for developers to extend with custom tools.
 
-- Supports both STDIO and SSE modes
+- Supports all Model Context Protocol (MCP) transfer modes (STDIO, SSE, Streamable Http)
 - Supports multiple SQL execution, separated by ";"
 - Supports querying database table names and fields based on table comments
 - Supports SQL execution plan analysis
@@ -21,6 +21,7 @@ mcp_mysql_server_pro is not just about MySQL CRUD operations, but also includes 
              "CREATE", "ALTER", "DROP", "TRUNCATE"]  # Administrator permissions
     ```
 - Supports prompt template invocation
+
 
 ## Tool List
 | Tool Name                  | Description                                                                                                                                                                                                              |
@@ -66,11 +67,13 @@ MYSQL_ROLE=readonly
 # SSE mode
 mysql_mcp_server_sse
 
+## Streamable Http mode
+mysql_mcp_server_streamable_http
 ```
 
 4. mcp client
 
-go to see see “Use uv to start the service”
+go to see see "Use uv to start the service"
 ^_^
 
 
@@ -80,6 +83,7 @@ Note:
 - Make sure the database configuration is correct and can connect
 
 ### Run with uvx, Client Configuration
+- This method can be used directly in MCP-supported clients, no need to download the source code. For example, Tongyi Qianwen plugin, trae editor, etc.
 ```json
 {
     "mcpServers": {
@@ -103,6 +107,47 @@ Note:
 }
 ```
 
+### Local Development with Streamable Http mode
+
+- Use uv to start the service
+
+Add the following content to your mcp client tools, such as cursor, cline, etc.
+
+mcp json as follows:
+```
+{
+  "mcpServers": {
+    "mysql_mcp_server_pro": {
+      "name": "mysql_mcp_server_pro",
+      "type": "streamableHttp",
+      "description": "",
+      "isActive": true,
+      "baseUrl": "http://localhost:3000/mcp/"
+    }
+  }
+}
+```
+
+Modify the .env file content to update the database connection information with your database details:
+```
+# MySQL Database Configuration
+MYSQL_HOST=192.168.xxx.xxx
+MYSQL_PORT=3306
+MYSQL_USER=root
+MYSQL_PASSWORD=root
+MYSQL_DATABASE=a_llm
+MYSQL_ROLE=admin
+```
+
+Start commands:
+```
+# Download dependencies
+uv sync
+
+# Start
+uv run -m mysql_mcp_server_pro.server
+```
+
 ### Local Development with SSE Mode
 
 - Use uv to start the service
@@ -113,8 +158,8 @@ mcp json as follows:
 ```
 {
   "mcpServers": {
-    "operateMysql": {
-      "name": "operateMysql",
+    "mysql_mcp_server_pro": {
+      "name": "mysql_mcp_server_pro",
       "description": "",
       "isActive": true,
       "baseUrl": "http://localhost:9000/sse"
@@ -140,7 +185,7 @@ Start commands:
 uv sync
 
 # Start
-uv run -m mysql_mcp_server_pro.server 
+uv run -m mysql_mcp_server_pro.server --sse
 ```
 
 ### Local Development with STDIO Mode

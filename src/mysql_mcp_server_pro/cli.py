@@ -6,4 +6,8 @@ def stdio_entry():
 
 def sse_entry():
     """SSE 模式入口点"""
-    main(mode="sse") 
+    main(mode="sse")
+
+def streamable_http_entry():
+    """Streamable Http 入口点"""
+    main(mode="streamable_http")

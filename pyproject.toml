@@ -1,6 +1,6 @@
 [project]
 name = "mysql_mcp_server_pro"
-version = "0.0.6"
+version = "0.0.7"
 license = { text = "MIT" }
 description = "Support for SSE, STDIO in MySQL MCP server, includes CRUD, database anomaly analysis capabilities .支持SSE，STDIO；不仅止于mysql的增删改查功能； 还包含了数据库异常分析能力；且便于开发者们进行个性化的工具扩展"
 readme = "README.md"
@@ -24,6 +24,7 @@ build-backend = "hatchling.build"
 [project.scripts]
 mysql_mcp_server_pro = "mysql_mcp_server_pro.cli:stdio_entry"
 mysql_mcp_server_sse = "mysql_mcp_server_pro.cli:sse_entry"
+mysql_mcp_server_streamable_http = "mysql_mcp_server_pro.cli:streamable_http_entry"
 
 [tool.hatch.build]
 packages = ["src"]

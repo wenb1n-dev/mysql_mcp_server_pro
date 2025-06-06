@@ -6,7 +6,7 @@
 ## 介绍
 mcp_mysql_server_pro 不仅止于mysql的增删改查功能，还包含了数据库异常分析能力，且便于开发者们进行个性化的工具扩展
 
-- 支持 STDIO 方式 与 SSE 方式
+- 支持 Model Context Protocol (MCP) 所有传输模式（STDIO、SSE、Streamable Http）
 - 支持 支持多sql执行，以";"分隔。 
 - 支持 根据表注释可以查询出对于的数据库表名，表字段
 - 支持 sql执行计划分析
@@ -65,6 +65,9 @@ MYSQL_ROLE=readonly
 ```bash
 # SSE 模式
 mysql_mcp_server_sse
+
+## Streamable Http 模式
+mysql_mcp_server_streamable_http
 ```
 
 4. 在mcp 客户端配置上。详细看下方的sse启动
@@ -103,6 +106,46 @@ mysql_mcp_server_sse
 
 ```
 
+### 本地开发 Streamable Http 方式
+
+- 使用 uv 启动服务
+
+将以下内容添加到你的 mcp client 工具中，例如cursor、cline等
+
+mcp json 如下
+````
+{
+  "mcpServers": {
+    "mysql_mcp_server_pro": {
+      "name": "mysql_mcp_server_pro",
+      "type": "streamableHttp",
+      "description": "",
+      "isActive": true,
+      "baseUrl": "http://localhost:3000/mcp/"
+    }
+  }
+}
+````
+
+修改.env 文件内容,将数据库连接信息修改为你的数据库连接信息
+```
+# MySQL数据库配置
+MYSQL_HOST=192.168.xxx.xxx
+MYSQL_PORT=3306
+MYSQL_USER=root
+MYSQL_PASSWORD=root
+MYSQL_DATABASE=a_llm
+MYSQL_ROLE=admin
+```
+
+启动命令
+```
+# 下载依赖
+uv sync
+
+# 启动
+uv run -m mysql_mcp_server_pro.server
+```
 
 ### 本地开发 SSE 方式
 
@@ -114,8 +157,8 @@ mcp json 如下
 ````
 {
   "mcpServers": {
-    "operateMysql": {
-      "name": "operateMysql",
+    "mysql_mcp_server_pro": {
+      "name": "mysql_mcp_server_pro",
       "description": "",
       "isActive": true,
       "baseUrl": "http://localhost:9000/sse"
@@ -141,7 +184,7 @@ MYSQL_ROLE=admin
 uv sync
 
 # 启动
-uv run -m mysql_mcp_server_pro.server 
+uv run -m mysql_mcp_server_pro.server --sse
 ```
 
 ### 本地开发 STDIO 方式 

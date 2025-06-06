@@ -1,18 +1,25 @@
 import asyncio
+import contextlib
+
+from collections.abc import AsyncIterator
+
 import uvicorn
 
 from typing import Sequence, Dict, Any
 from mcp.server.sse import SseServerTransport
 
-from mcp.server import Server
+from mcp.server.lowlevel import Server
+from mcp.server.streamable_http_manager import StreamableHTTPSessionManager
 from mcp.types import Tool, TextContent, Prompt, GetPromptResult
 
 from starlette.applications import Starlette
 from starlette.routing import Route, Mount
+from starlette.types import Scope, Receive, Send
 
-
+from .config.event_store import InMemoryEventStore
 from .handles.base import ToolRegistry
 from .prompts.BasePrompt import PromptRegistry
+
 
 # 初始化服务器
 app = Server("operateMysql")
@@ -122,14 +129,43 @@ def run_sse():
     )
     uvicorn.run(starlette_app, host="0.0.0.0", port=9000)
 
+def run_streamable_http(json_response: bool):
+    event_store = InMemoryEventStore()
+
+    session_manager = StreamableHTTPSessionManager(
+        app=app,
+        event_store=event_store,
+        json_response=json_response,
+    )
+
+    async def handle_streamable_http(
+            scope: Scope, receive: Receive, send: Send
+    ) -> None:
+        await session_manager.handle_request(scope, receive, send)
+
+    @contextlib.asynccontextmanager
+    async def lifespan(app: Starlette) -> AsyncIterator[None]:
+        async with session_manager.run():
+            yield
 
 
-def main(mode="sse"):
+    starlette = Starlette(
+        debug=True,
+        routes=[
+            Mount("/mcp", app=handle_streamable_http)
+        ],
+        lifespan=lifespan,
+    )
+    uvicorn.run(starlette, host="0.0.0.0", port=3000)
+
+
+def main(mode="streamable_http"):
     """
     主入口函数，用于命令行启动
-    支持两种模式：
-    1. SSE 模式（默认）：mysql-mcp-server
+    支持三种模式：
+    1. SSE 模式：mysql-mcp-server
     2. stdio 模式：mysql-mcp-server --stdio
+    3. streamable http 模式（默认）
     
     Args:
         mode (str): 运行模式，可选值为 "sse" 或 "stdio"
@@ -143,12 +179,17 @@ def main(mode="sse"):
     elif len(sys.argv) > 1 and sys.argv[1] == "--sse":
         # SSE 模式
         run_sse()
+    elif len(sys.argv) > 1 and sys.argv[1] == "--streamable_http":
+        # Streamable Http 模式
+        run_streamable_http(False)
     else:
         # 使用传入的默认模式
         if mode == "stdio":
             asyncio.run(run_stdio())
-        else:
+        elif mode == "sse":
             run_sse()
+        else:
+            run_streamable_http(False)
 
 if __name__ == "__main__":
     main()
