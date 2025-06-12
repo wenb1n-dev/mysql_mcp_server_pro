@@ -1,5 +1,6 @@
 [![简体中文](https://img.shields.io/badge/简体中文-点击查看-orange)](README-zh.md)
 [![English](https://img.shields.io/badge/English-Click-yellow)](README.md)
+[![MseeP.ai Security Assessment Badge](https://mseep.net/mseep-audited.png)](https://mseep.ai/app/wenb1n-dev-mysql-mcp-server-pro)
 
 # mcp_mysql_server_pro
 
