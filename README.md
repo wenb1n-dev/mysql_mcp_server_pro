@@ -212,7 +212,7 @@ mcp json as follows:
         "command": "uv",
         "args": [
           "--directory",
-          "/Volumes/mysql_mcp_server_pro/src/mysql_mcp_server_pro",    # 这里需要替换为你的项目路径
+          "/Volumes/mysql_mcp_server_pro/src/mysql_mcp_server_pro",    # Replace this with your project path
           "run",
           "-m",
           "mysql_mcp_server_pro.server",
