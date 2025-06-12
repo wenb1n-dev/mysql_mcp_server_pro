@@ -1,8 +1,10 @@
 import asyncio
 import contextlib
+import os
 
 from collections.abc import AsyncIterator
 
+import click
 import uvicorn
 
 from typing import Sequence, Dict, Any
@@ -158,8 +160,10 @@ def run_streamable_http(json_response: bool):
     )
     uvicorn.run(starlette, host="0.0.0.0", port=3000)
 
-
-def main(mode="streamable_http"):
+@click.command()
+@click.option("--envfile", default=None, help="env file path")
+@click.option("--mode", default="streamable_http", help="mode type")
+def main(mode, envfile):
     """
     主入口函数，用于命令行启动
     支持三种模式：
@@ -170,26 +174,29 @@ def main(mode="streamable_http"):
     Args:
         mode (str): 运行模式，可选值为 "sse" 或 "stdio"
     """
-    import sys
-    
-    # 命令行参数优先级高于默认参数
-    if len(sys.argv) > 1 and sys.argv[1] == "--stdio":
-        # 标准输入输出模式
-        asyncio.run(run_stdio())
-    elif len(sys.argv) > 1 and sys.argv[1] == "--sse":
-        # SSE 模式
-        run_sse()
-    elif len(sys.argv) > 1 and sys.argv[1] == "--streamable_http":
-        # Streamable Http 模式
-        run_streamable_http(False)
+    from dotenv import load_dotenv
+
+        # 优先加载指定的env文件
+    if envfile:
+        load_dotenv(envfile)
     else:
-        # 使用传入的默认模式
-        if mode == "stdio":
-            asyncio.run(run_stdio())
-        elif mode == "sse":
-            run_sse()
-        else:
-            run_streamable_http(False)
+        # 获取当前文件（server.py）所在目录的绝对路径
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        # 拼接出 config/.env 的绝对路径
+        env_path = os.path.join(BASE_DIR, "config", ".env")
+        load_dotenv(env_path)
+
+    #from .config.dbconfig import get_db_config
+    #config = get_db_config()
+    #print("============",config)
+
+    # 使用传入的默认模式
+    if mode == "stdio":
+        asyncio.run(run_stdio())
+    elif mode == "sse":
+        run_sse()
+    else:
+        run_streamable_http(False)
 
 if __name__ == "__main__":
     main()

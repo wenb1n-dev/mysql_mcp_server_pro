@@ -17,7 +17,7 @@ def get_db_config():
         ValueError: 当必需的配置信息缺失时抛出
     """
     # 加载.env文件
-    load_dotenv()
+    ##load_dotenv()
 
     config = {
         "host": os.getenv("MYSQL_HOST", "localhost"),

@@ -46,6 +46,10 @@ mcp_mysql_server_pro 不仅止于mysql的增删改查功能，还包含了数据
 1. 安装包
 ```bash
 pip install mysql_mcp_server_pro
+
+参数说明
+--mode：传输模式（“stdio”，“sse”，“streamablehttp”）
+--envfile 环境变量文件路径
 ```
 
 2. 配置环境变量
@@ -64,10 +68,10 @@ MYSQL_ROLE=readonly
 3. 运行服务
 ```bash
 # SSE 模式
-mysql_mcp_server_sse
+mysql_mcp_server_pro --mode sse --envfile /path/to/.env
 
-## Streamable Http 模式
-mysql_mcp_server_streamable_http
+## Streamable Http 模式 默认该方式
+mysql_mcp_server_pro --envfile /path/to/.env
 ```
 
 4. 在mcp 客户端配置上。详细看下方的sse启动
@@ -75,7 +79,7 @@ mysql_mcp_server_streamable_http
 
 
 注意：
-- `.env` 文件应该放在运行命令的目录下
+- `.env` 文件应该放在运行命令的目录下或者使用--envfile参数自定义路径
 - 也可以直接在环境中设置这些变量
 - 确保数据库配置正确且可以连接
 
@@ -90,7 +94,9 @@ mysql_mcp_server_streamable_http
 			"args": [
 				"--from",
 				"mysql_mcp_server_pro",
-				"mysql_mcp_server_pro"
+				"mysql_mcp_server_pro",
+				"--mode",
+				"stdio"
 			],
 			"env": {
 				"MYSQL_HOST": "192.168.x.xxx",
@@ -145,6 +151,9 @@ uv sync
 
 # 启动
 uv run -m mysql_mcp_server_pro.server
+
+# 自定义env文件位置
+uv run -m mysql_mcp_server_pro.server --envfile /path/to/.env
 ```
 
 ### 本地开发 SSE 方式
@@ -184,7 +193,10 @@ MYSQL_ROLE=admin
 uv sync
 
 # 启动
-uv run -m mysql_mcp_server_pro.server --sse
+uv run -m mysql_mcp_server_pro.server --mode sse
+
+# 自定义env文件位置
+uv run -m mysql_mcp_server_pro.server --mode sse --envfile /path/to/.env
 ```
 
 ### 本地开发 STDIO 方式 
@@ -205,7 +217,8 @@ mcp json 如下
           "run",
           "-m",
           "mysql_mcp_server_pro.server",
-          "--stdio"
+          "--mode",
+          "stdio"
         ],
         "env": {
           "MYSQL_HOST": "localhost",

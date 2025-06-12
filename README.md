@@ -65,10 +65,11 @@ MYSQL_ROLE=readonly
 3. Run Service
 ```bash
 # SSE mode
-mysql_mcp_server_sse
+mysql_mcp_server_pro --mode sse --envfile /path/to/.env
 
-## Streamable Http mode
-mysql_mcp_server_streamable_http
+## Streamable Http mode (default)
+mysql_mcp_server_pro --envfile /path/to/.env
+
 ```
 
 4. mcp client
@@ -78,7 +79,7 @@ go to see see "Use uv to start the service"
 
 
 Note:
-- The `.env` file should be placed in the directory where you run the command
+- The `.env` file should be placed in the directory where you run the command or use --envfile parameter to specify the path
 - You can also set these variables directly in your environment
 - Make sure the database configuration is correct and can connect
 
@@ -86,24 +87,26 @@ Note:
 - This method can be used directly in MCP-supported clients, no need to download the source code. For example, Tongyi Qianwen plugin, trae editor, etc.
 ```json
 {
-    "mcpServers": {
-        "mysql": {
-            "command": "uvx",
-            "args": [
-                "--from",
-                "mysql_mcp_server_pro",
-                "mysql_mcp_server_pro"
-            ],
-            "env": {
-                "MYSQL_HOST": "192.168.x.xxx",
-                "MYSQL_PORT": "3306",
-                "MYSQL_USER": "root",
-                "MYSQL_PASSWORD": "root",
-                "MYSQL_DATABASE": "a_llm",
-                "MYSQL_ROLE": "admin"
-            }
-        }
-    }
+	"mcpServers": {
+		"mysql": {
+			"command": "uvx",
+			"args": [
+				"--from",
+				"mysql_mcp_server_pro",
+				"mysql_mcp_server_pro",
+				"--mode",
+				"stdio"
+			],
+			"env": {
+				"MYSQL_HOST": "192.168.x.xxx",
+				"MYSQL_PORT": "3306",
+				"MYSQL_USER": "root",
+				"MYSQL_PASSWORD": "root",
+				"MYSQL_DATABASE": "a_llm",
+				"MYSQL_ROLE": "admin"
+			}
+		}
+	}
 }
 ```
 
@@ -146,6 +149,9 @@ uv sync
 
 # Start
 uv run -m mysql_mcp_server_pro.server
+
+# Custom env file location
+uv run -m mysql_mcp_server_pro.server --envfile /path/to/.env
 ```
 
 ### Local Development with SSE Mode
@@ -176,7 +182,7 @@ MYSQL_PORT=3306
 MYSQL_USER=root
 MYSQL_PASSWORD=root
 MYSQL_DATABASE=a_llm
-MYSQL_ROLE=readonly  # Optional, default is 'readonly'. Available values: readonly, writer, admin
+MYSQL_ROLE=admin
 ```
 
 Start commands:
@@ -185,7 +191,10 @@ Start commands:
 uv sync
 
 # Start
-uv run -m mysql_mcp_server_pro.server --sse
+uv run -m mysql_mcp_server_pro.server --mode sse
+
+# Custom env file location
+uv run -m mysql_mcp_server_pro.server --mode sse --envfile /path/to/.env
 ```
 
 ### Local Development with STDIO Mode
@@ -202,11 +211,12 @@ mcp json as follows:
         "command": "uv",
         "args": [
           "--directory",
-          "/Volumes/mysql_mcp_server_pro/src/mysql_mcp_server_pro",    # Replace this with your project path
+          "/Volumes/mysql_mcp_server_pro/src/mysql_mcp_server_pro",    # 这里需要替换为你的项目路径
           "run",
           "-m",
           "mysql_mcp_server_pro.server",
-          "--stdio"
+          "--mode",
+          "stdio"
         ],
         "env": {
           "MYSQL_HOST": "localhost",
@@ -214,12 +224,11 @@ mcp json as follows:
           "MYSQL_USER": "root", 
           "MYSQL_PASSWORD": "123456",
           "MYSQL_DATABASE": "a_llm",
-          "MYSQL_ROLE": "admin" # Optional, default is 'readonly'. Available values: readonly, writer, admin
-
+          "MYSQL_ROLE": "admin"
        }
     }
   }
-}  
+} 
 ```
 
 ## Custom Tool Extensions

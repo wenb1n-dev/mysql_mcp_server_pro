@@ -11,8 +11,6 @@ from mysql_mcp_server_pro.handles import (
 
 execute_sql = ExecuteSQL()
 
-config = get_db_config()
-
 class GetDBHealthIndexUsage(BaseHandler):
     name = "get_db_health_index_usage"
     description = (
@@ -34,9 +32,11 @@ class GetDBHealthIndexUsage(BaseHandler):
         )
 
     async def run_tool(self, arguments: Dict[str, Any]) -> Sequence[TextContent]:
-        count_zero_result = await self.get_count_zero(arguments)
-        max_time_result = await self.get_max_timer(arguments)
-        not_used_index_result = await self.get_not_used_index(arguments)
+        config = get_db_config()
+
+        count_zero_result = await self.get_count_zero(arguments,config)
+        max_time_result = await self.get_max_timer(arguments,config)
+        not_used_index_result = await self.get_not_used_index(arguments,config)
 
 
         # 合并结果
@@ -51,7 +51,7 @@ class GetDBHealthIndexUsage(BaseHandler):
     """
         获取冗余索引情况
     """
-    async def get_count_zero(self, arguments: Dict[str, Any]) -> Sequence[TextContent]:
+    async def get_count_zero(self, arguments: Dict[str, Any], config) -> Sequence[TextContent]:
         try:
             sql = "SELECT object_name,index_name,count_star from performance_schema.table_io_waits_summary_by_index_usage "
             sql += f"WHERE object_schema = '{config['database']}' and count_star = 0 AND sum_timer_wait = 0 ;"
@@ -64,7 +64,7 @@ class GetDBHealthIndexUsage(BaseHandler):
     """
         获取性能较差的索引情况
     """
-    async def get_max_timer(self, arguments: Dict[str, Any]) -> Sequence[TextContent]:
+    async def get_max_timer(self, arguments: Dict[str, Any], config) -> Sequence[TextContent]:
         try:
             sql = "SELECT object_schema,object_name,index_name,(max_timer_wait / 1000000000000) max_timer_wait "
             sql += f"FROM performance_schema.table_io_waits_summary_by_index_usage where object_schema = '{config['database']}' "
@@ -77,7 +77,7 @@ class GetDBHealthIndexUsage(BaseHandler):
     """
         获取未使用索引查询时间大于30秒的top5情况
     """
-    async def get_not_used_index(self, arguments: Dict[str, Any]) -> Sequence[TextContent]:
+    async def get_not_used_index(self, arguments: Dict[str, Any], config) -> Sequence[TextContent]:
         try:
             sql = "SELECT object_schema,object_name, (max_timer_wait / 1000000000000) max_timer_wait "
             sql += f"FROM performance_schema.table_io_waits_summary_by_index_usage where object_schema = '{config['database']}' "
