@@ -3,6 +3,7 @@ import contextlib
 import os
 
 from collections.abc import AsyncIterator
+from starlette.responses import Response
 
 import click
 import uvicorn
@@ -121,6 +122,7 @@ def run_sse():
                 request.scope, request.receive, request._send
         ) as streams:
             await app.run(streams[0], streams[1], app.create_initialization_options())
+        return Response(status_code=204)  
 
     starlette_app = Starlette(
         debug=True,
