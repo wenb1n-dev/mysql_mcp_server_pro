@@ -37,25 +37,28 @@ class QueryTableData(BasePrompt):
           1. 解析用户输入的自然语言指令，提取关键信息，如表描述和查询条件。
           2. 调用“get_table_name”工具，获取对应的表名。
           3. 调用“get_table_desc”工具，获取表的结构信息。
-          4. 根据表结构信息和用户输入的查询条件，生成SQL查询语句并执行，返回查询结果。
+          4. 根据表结构信息和用户输入的查询条件，生成SQL查询语句并调用“execute_sql”工具，返回查询结果。
         - Examples:
           - 例子1：用户输入“查询用户表张三的数据”
             解析结果：表描述为“用户表”，查询条件为“张三”。
             调用工具1：根据“用户表”描述获取表名，假设返回表名为“user_table”。
             调用工具2：根据“user_table”获取表结构，假设表结构包含字段“id”、“name”、“age”。
             生成SQL查询语句：`SELECT * FROM user_table WHERE name = '张三';`
+            调用工具3：根据生成的SQL,获取结果。
             查询结果：返回张三的相关数据。
           - 例子2：用户输入“查询商品表价格大于100的商品”
             解析结果：表描述为“商品表”，查询条件为“价格大于100”。
             调用工具1：根据“商品表”描述获取表名，假设返回表名为“product_table”。
             调用工具2：根据“product_table”获取表结构，假设表结构包含字段“id”、“name”、“price”。
             生成SQL查询语句：`SELECT * FROM product_table WHERE price > 100;`
+            调用工具3：根据生成的SQL,获取结果。
             查询结果：返回价格大于100的商品数据。
           - 例子3：用户输入“查询订单表张三的订单金额”
             解析结果：表描述为“订单表”，查询条件为“张三”。
             调用工具1：根据“订单表”描述获取表名，假设返回表名为“order_table”。
             调用工具2：根据“order_table”获取表结构，假设表结构包含字段“id”、“user_name”、“order_amount”。
             生成SQL查询语句：`SELECT order_amount FROM order_table WHERE user_name = '张三';`
+            调用工具3：根据生成的SQL,获取结果。
             查询结果：返回张三的订单金额。       
         """
 
