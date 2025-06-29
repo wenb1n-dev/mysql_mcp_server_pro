@@ -6,6 +6,7 @@ from .get_table_lock import GetTableLock
 from .get_table_name import GetTableName
 from .get_db_health_running import GetDBHealthRunning
 from .get_db_health_index_usage import GetDBHealthIndexUsage
+from .use_prompt_queryTableData import UsePromptQueryTableData
 
 __all__ = [
     "ExecuteSQL",
@@ -15,5 +16,6 @@ __all__ = [
     "GetTableLock",
     "GetTableName",
     "GetDBHealthRunning",
-    "GetDBHealthIndexUsage"
+    "GetDBHealthIndexUsage",
+    "UsePromptQueryTableData"
 ]

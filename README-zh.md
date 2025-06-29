@@ -2,7 +2,7 @@
 [![English](https://img.shields.io/badge/English-Click-yellow)](README.md)
 
 # mcp_mysql_server_pro
-#### 帮忙点个赞啊，朋友们。
+## 好用就帮忙点个赞，支持一下呀，拜托各位精英们～。
 ## 介绍
 mcp_mysql_server_pro 不仅止于mysql的增删改查功能，还包含了数据库异常分析能力，且便于开发者们进行个性化的工具扩展
 
@@ -32,7 +32,8 @@ mcp_mysql_server_pro 不仅止于mysql的增删改查功能，还包含了数据
 | get_table_index       | 根据表名搜索数据库中对应的表索引,支持多表查询                                                                                                            |
 | get_table_lock        | 查询当前mysql服务器是否存在行级锁、表级锁情况                                                                                                          |
 | get_table_name        | 根据表注释、表描述搜索数据库中对应的表名                                                                                                               |
-| get_db_health_index_usage | 获取当前连接的mysql库的索引使用情况,包含冗余索引情况、性能较差的索引情况、未使用索引且查询时间大于30秒top5情况|
+| get_db_health_index_usage | 获取当前连接的mysql库的索引使用情况,包含冗余索引情况、性能较差的索引情况、未使用索引且查询时间大于30秒top5情况                                                                      |
+| use_prompt_queryTableData | 使用内置提示词，让模型构建一个链式调用mcp中的工具(不作为常用固定工具，需自行调整代码开启，详见该类)                                                                               |
 
 ## prompt 列表
 | prompt名称                   | 描述                                                                                                                                 |

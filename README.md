@@ -35,6 +35,7 @@ mcp_mysql_server_pro is not just about MySQL CRUD operations, but also includes 
 | get_table_lock             | Check if there are row-level locks or table-level locks in the current MySQL server                                                                                                                                      |
 | get_table_name             | Search for table names in the database based on table comments and descriptions                                                                                                                                          |
 | get_db_health_index_usage  | Get the index usage of the currently connected mysql database, including redundant index situations, poorly performing index situations, and the top 5 unused index situations with query times greater than 30 seconds  | 
+| use_prompt_queryTableData | Use built-in prompts to let the model construct a chain call of tools in mcp (not a commonly used fixed tool, you need to modify the code to enable it, see this class for details) |
 
 ## Prompt List
 | Prompt Name                | Description                                                                                                                           |
