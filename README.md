@@ -1,7 +1,7 @@
 [![简体中文](https://img.shields.io/badge/简体中文-点击查看-orange)](README-zh.md)
 [![English](https://img.shields.io/badge/English-Click-yellow)](README.md)
 [![MseeP.ai Security Assessment Badge](https://mseep.net/mseep-audited.png)](https://mseep.ai/app/wenb1n-dev-mysql-mcp-server-pro)
-
+[!MCPHub](https://mcphub.com/mcp-servers/wenb1n-dev/mysql_mcp_server_pro)
 # mcp_mysql_server_pro
 
 ## Introduction
@@ -127,7 +127,7 @@ mcp json as follows:
       "type": "streamableHttp",
       "description": "",
       "isActive": true,
-      "baseUrl": "http://localhost:3000/mcp/"
+      "url": "http://localhost:3000/mcp/"
     }
   }
 }
@@ -170,7 +170,7 @@ mcp json as follows:
       "name": "mysql_mcp_server_pro",
       "description": "",
       "isActive": true,
-      "baseUrl": "http://localhost:9000/sse"
+      "url": "http://localhost:9000/sse"
     }
   }
 }
