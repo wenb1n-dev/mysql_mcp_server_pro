@@ -3,7 +3,7 @@ import contextlib
 import os
 
 from collections.abc import AsyncIterator
-from starlette.responses import Response
+from starlette.responses import Response, HTMLResponse
 
 import click
 import uvicorn
@@ -18,10 +18,16 @@ from mcp.types import Tool, TextContent, Prompt, GetPromptResult
 from starlette.applications import Starlette
 from starlette.routing import Route, Mount
 from starlette.types import Scope, Receive, Send
+from starlette.middleware import Middleware
+
 
 from .config.event_store import InMemoryEventStore
 from .handles.base import ToolRegistry
 from .prompts.BasePrompt import PromptRegistry
+from .oauth import OAuthMiddleware, login, login_page
+
+
+
 
 
 # 初始化服务器
@@ -133,7 +139,7 @@ def run_sse():
     )
     uvicorn.run(starlette_app, host="0.0.0.0", port=9000)
 
-def run_streamable_http(json_response: bool):
+def run_streamable_http(json_response: bool, oauth: bool):
     event_store = InMemoryEventStore()
 
     session_manager = StreamableHTTPSessionManager(
@@ -145,27 +151,58 @@ def run_streamable_http(json_response: bool):
     async def handle_streamable_http(
             scope: Scope, receive: Receive, send: Send
     ) -> None:
-        await session_manager.handle_request(scope, receive, send)
+        if scope["type"] == "lifespan":
+            while True:
+                message = await receive()
+                if message["type"] == "lifespan.startup":
+                    await send({"type": "lifespan.startup.complete"})
+                elif message["type"] == "lifespan.shutdown":
+                    await send({"type": "lifespan.shutdown.complete"})
+                    return
+        else:
+            await session_manager.handle_request(scope, receive, send)
 
     @contextlib.asynccontextmanager
     async def lifespan(app: Starlette) -> AsyncIterator[None]:
         async with session_manager.run():
             yield
 
+    routes = []
 
-    starlette = Starlette(
+    middleware = []
+
+    if oauth:
+        middleware.append(
+            Middleware(OAuthMiddleware, exclude_paths=["/login", "/mcp/auth/login"])
+        )
+        routes.append(Route("/login", endpoint=login_page, methods=["GET"]))
+        routes.append(Route("/mcp/auth/login", endpoint=login, methods=["POST"]))
+
+    routes.append(Mount("/mcp", app=handle_streamable_http))
+
+    # 创建应用实例
+    starlette_app = Starlette(
         debug=True,
-        routes=[
-            Mount("/mcp", app=handle_streamable_http)
-        ],
-        lifespan=lifespan,
+        routes=routes,
+        middleware=middleware,
+        lifespan=lifespan
     )
-    uvicorn.run(starlette, host="0.0.0.0", port=3000)
+
+    config = uvicorn.Config(
+        app=starlette_app,
+        host="0.0.0.0",
+        port=3000,
+        lifespan="on"
+    )
+
+    server = uvicorn.Server(config)
+    server.run()
 
 @click.command()
 @click.option("--envfile", default=None, help="env file path")
 @click.option("--mode", default="streamable_http", help="mode type")
-def main(mode, envfile):
+@click.option("--oauth", default=False, help="open oauth")
+def main(mode, envfile, oauth):
     """
     主入口函数，用于命令行启动
     支持三种模式：
@@ -178,7 +215,7 @@ def main(mode, envfile):
     """
     from dotenv import load_dotenv
 
-        # 优先加载指定的env文件
+    # 优先加载指定的env文件
     if envfile:
         load_dotenv(envfile)
     else:
@@ -198,7 +235,7 @@ def main(mode, envfile):
     elif mode == "sse":
         run_sse()
     else:
-        run_streamable_http(False)
+        run_streamable_http(False,oauth)
 
 if __name__ == "__main__":
     main()

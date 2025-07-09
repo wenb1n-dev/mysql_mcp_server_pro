@@ -240,6 +240,32 @@ mcp json as follows:
 
 2. Import the new tool in __init__.py to make it available in the server
 
+## OAuth2.0 Authentication
+1. Start the authentication service. By default, it uses the built-in OAuth 2.0 password mode authentication. You can modify your own authentication service address in the env file.
+```aiignore
+uv run -m mysql_mcp_server_pro.server --oauth true
+```
+
+2. Visit the authentication service at http://localhost:3000/login. Default username and password are configured in the env file.
+
+3. Copy the token and add it to the request headers, for example:
+```json
+{
+  "mcpServers": {
+    "mysql_mcp_server_pro": {
+      "name": "mysql_mcp_server_pro",
+      "type": "streamableHttp",
+      "description": "",
+      "isActive": true,
+      "url": "http://localhost:3000/mcp/",
+      "headers": {
+        "authorization": "bearer TOKEN_VALUE"
+      }
+    }
+  }
+}
+```
+
 ## Examples
 1. Create a new table and insert data, prompt format as follows:
 ```

@@ -10,6 +10,7 @@
 mcp_mysql_server_pro 不仅止于mysql的增删改查功能，还包含了数据库异常分析能力，且便于开发者们进行个性化的工具扩展
 
 - 支持 Model Context Protocol (MCP) 所有传输模式（STDIO、SSE、Streamable Http）
+- 支持 Oauth2 认证
 - 支持 支持多sql执行，以";"分隔。 
 - 支持 根据表注释可以查询出对于的数据库表名，表字段
 - 支持 sql执行计划分析
@@ -54,6 +55,7 @@ pip install mysql_mcp_server_pro
 参数说明
 --mode：传输模式（“stdio”，“sse”，“streamablehttp”）
 --envfile 环境变量文件路径
+--oauth 启用 oauth 认证（目前仅支持“streamablehttp”模式）
 ```
 
 2. 配置环境变量
@@ -158,6 +160,9 @@ uv run -m mysql_mcp_server_pro.server
 
 # 自定义env文件位置
 uv run -m mysql_mcp_server_pro.server --envfile /path/to/.env
+
+# 启动oauth认证
+uv run -m mysql_mcp_server_pro.server --oauth true
 ```
 
 ### 本地开发 SSE 方式
@@ -241,6 +246,32 @@ mcp json 如下
 1. 在handles包中新增工具类，继承BaseHandler，实现get_tool_description、run_tool方法
 
 2. 在__init__.py中引入新工具即可在server中调用
+
+## OAuth2.0 认证
+1. 启动认证服务,默认使用自带的OAuth 2.0 密码模式认证，可以在env中修改自己的认证服务地址
+```aiignore
+uv run -m mysql_mcp_server_pro.server --oauth true
+```
+
+2. 访问 认证服务 http://localhost:3000/login ，默认帐号密码在 env 中配置
+
+3. 复制 token ，将token 添加在请求头中，例如
+```json
+{
+  "mcpServers": {
+    "mysql_mcp_server_pro": {
+      "name": "mysql_mcp_server_pro",
+      "type": "streamableHttp",
+      "description": "",
+      "isActive": true,
+      "url": "http://localhost:3000/mcp/",
+      "headers": {
+        "authorization": "bearer TOKEN值"
+      }
+    }
+  }
+}
+```
 
 
 ## 工具调用示例
