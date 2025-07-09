@@ -254,8 +254,10 @@ uv run -m mysql_mcp_server_pro.server --oauth true
 ```
 
 2. 访问 认证服务 http://localhost:3000/login ，默认帐号密码在 env 中配置
+ ![image](https://github.com/user-attachments/assets/ec8a629e-62f9-4b93-b3cc-442b3d2dc46f)
 
-3. 复制 token ，将token 添加在请求头中，例如
+4. 复制 token ，将token 添加在请求头中，例如
+![image](https://github.com/user-attachments/assets/a5451e35-bddd-4e49-8aa9-a4178d30ec88)
 ```json
 {
   "mcpServers": {
