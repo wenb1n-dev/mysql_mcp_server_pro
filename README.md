@@ -10,6 +10,7 @@
 mcp_mysql_server_pro is not just about MySQL CRUD operations, but also includes database anomaly analysis capabilities and makes it easy for developers to extend with custom tools.
 
 - Supports all Model Context Protocol (MCP) transfer modes (STDIO, SSE, Streamable Http)
+- Supports OAuth2.0
 - Supports multiple SQL execution, separated by ";"
 - Supports querying database table names and fields based on table comments
 - Supports SQL execution plan analysis
@@ -247,8 +248,12 @@ uv run -m mysql_mcp_server_pro.server --oauth true
 ```
 
 2. Visit the authentication service at http://localhost:3000/login. Default username and password are configured in the env file.
+   ![image](https://github.com/user-attachments/assets/ec8a629e-62f9-4b93-b3cc-442b3d2dc46f)
+
 
 3. Copy the token and add it to the request headers, for example:
+   ![image](https://github.com/user-attachments/assets/a5451e35-bddd-4e49-8aa9-a4178d30ec88)
+
 ```json
 {
   "mcpServers": {
