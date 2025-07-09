@@ -4,3 +4,5 @@ pypinyin>=0.48.0
 uvicorn>=0.24.0
 python-dotenv>=1.0.0
 starlette>=0.27.0
+# 认证和安全
+PyJWT>=2.8.0
