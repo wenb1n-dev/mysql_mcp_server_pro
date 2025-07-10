@@ -13,7 +13,7 @@ from mcp.types import TextContent
 
 from .base import BaseHandler
 from ..config import get_db_config, get_role_permissions
-from ..exceptions import SQLPermissionError, SQLExecutionError
+from ..handles.exceptions import SQLPermissionError, SQLExecutionError
 
 logger = logging.getLogger(__name__)
 
