@@ -25,9 +25,13 @@ def get_db_config():
         "user": os.getenv("MYSQL_USER"),
         "password": os.getenv("MYSQL_PASSWORD"),
         "database": os.getenv("MYSQL_DATABASE"),
-        "role": os.getenv("MYSQL_ROLE", "readonly")  # 默认为只读角色
+        "role": os.getenv("MYSQL_ROLE", "readonly"),  # 默认为只读角色
+        "connect_timeout": 30,
+        "connection_timeout": 30,
+        "use_pure": True,
+        "raise_on_warnings": True
     }
-    
+
     if not all([config["user"], config["password"], config["database"]]):
         raise ValueError("缺少必需的数据库配置")
 
