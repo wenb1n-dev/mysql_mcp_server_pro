@@ -75,6 +75,9 @@ mysql_mcp_server_pro --mode sse --envfile /path/to/.env
 ## Streamable Http mode (default)
 mysql_mcp_server_pro --envfile /path/to/.env
 
+# Streamable Http  oauth Authentication
+mysql_mcp_server_pro --oauth true
+
 ```
 
 4. mcp client
@@ -157,6 +160,9 @@ uv run -m mysql_mcp_server_pro.server
 
 # Custom env file location
 uv run -m mysql_mcp_server_pro.server --envfile /path/to/.env
+
+# oauth Authentication
+uv run -m mysql_mcp_server_pro.server --oauth true
 ```
 
 ### Local Development with SSE Mode

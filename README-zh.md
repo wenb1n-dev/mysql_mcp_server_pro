@@ -78,6 +78,10 @@ mysql_mcp_server_pro --mode sse --envfile /path/to/.env
 
 ## Streamable Http 模式 默认该方式
 mysql_mcp_server_pro --envfile /path/to/.env
+
+# Streamable Http 模式 启动oauth认证
+mysql_mcp_server_pro --oauth true
+
 ```
 
 4. 在mcp 客户端配置上。详细看下方的sse启动
