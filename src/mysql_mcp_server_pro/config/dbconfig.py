@@ -28,8 +28,7 @@ def get_db_config():
         "role": os.getenv("MYSQL_ROLE", "readonly"),  # 默认为只读角色
         "connect_timeout": 30,
         "connection_timeout": 30,
-        "use_pure": True,
-        "raise_on_warnings": True
+        "use_pure": True
     }
 
     if not all([config["user"], config["password"], config["database"]]):

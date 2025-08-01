@@ -187,7 +187,7 @@ class ExecuteSQL(BaseHandler):
             self.check_permissions(operations)
 
             cursor.execute(statement)
-            
+
             if cursor.description:  # SELECT 类查询
                 columns = [desc[0] for desc in cursor.description]
                 rows = cursor.fetchall()

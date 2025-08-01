@@ -4,13 +4,10 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 from typing import Optional, Dict, Set
 import os
-from dotenv import load_dotenv
 import time
 
 from .token_handler import TokenHandler
 
-# 加载环境变量
-load_dotenv()
 
 class OAuthMiddleware(BaseHTTPMiddleware):
     """OAuth认证中间件"""

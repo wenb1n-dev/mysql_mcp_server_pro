@@ -8,9 +8,7 @@ from pathlib import Path
 
 from .token_handler import TokenHandler
 from .config import oauth_config
-from dotenv import load_dotenv
 
-load_dotenv()
 
 async def login_page(request: Request) -> HTMLResponse:
     """返回登录页面"""
