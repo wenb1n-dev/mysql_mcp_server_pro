@@ -26,9 +26,10 @@ def get_db_config():
         "password": os.getenv("MYSQL_PASSWORD"),
         "database": os.getenv("MYSQL_DATABASE"),
         "role": os.getenv("MYSQL_ROLE", "readonly"),  # 默认为只读角色
-        "connect_timeout": 30,
-        "connection_timeout": 30,
-        "use_pure": True
+        "pool_size": int(os.getenv("POOL_SIZE", 10)),
+        "max_overflow": int(os.getenv("POOL_MAX_OVERFLOW", 20)),
+        "pool_recycle": int(os.getenv("POOL_RECYCLE", 3600)),
+        "pool_timeout": int(os.getenv("POOL_TIMEOUT", 30))
     }
 
     if not all([config["user"], config["password"], config["database"]]):

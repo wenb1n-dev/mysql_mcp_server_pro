@@ -8,11 +8,13 @@ requires-python = ">=3.11"
 dependencies = [
     "mcp>=1.8.0",
     "mysql-connector-python>=9.2.0",
+    "pymysql>=1.1.1",
     "pypinyin>=0.54.0",
     "python-dotenv>=1.1.0",
     "starlette>=0.46.1",
     "uvicorn>=0.34.0",
     "PyJWT>=2.8.0",
+    "sqlalchemy>=2.0.0",
 ]
 
 [[project.authors]]

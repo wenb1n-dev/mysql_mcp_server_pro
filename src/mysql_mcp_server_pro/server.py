@@ -20,7 +20,8 @@ from starlette.routing import Route, Mount
 from starlette.types import Scope, Receive, Send
 from starlette.middleware import Middleware
 
-
+from .config import get_db_config
+from .utils.execute_sql_util import ExecuteSqlUtil
 from .config.event_store import InMemoryEventStore
 from .handles.base import ToolRegistry
 from .prompts.BasePrompt import PromptRegistry
@@ -224,6 +225,8 @@ def main(mode, envfile, oauth):
         # 拼接出 config/.env 的绝对路径
         env_path = os.path.join(BASE_DIR, "config", ".env")
         load_dotenv(env_path)
+
+    ExecuteSqlUtil.create_mysql_pool(db_config=get_db_config())
 
     #from .config.dbconfig import get_db_config
     #config = get_db_config()
