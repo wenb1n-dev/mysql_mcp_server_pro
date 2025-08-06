@@ -7,6 +7,7 @@ from .get_table_name import GetTableName
 from .get_db_health_running import GetDBHealthRunning
 from .get_db_health_index_usage import GetDBHealthIndexUsage
 from .use_prompt_queryTableData import UsePromptQueryTableData
+from .optimize_sql import OptimizeSql
 
 __all__ = [
     "ExecuteSQL",
@@ -17,5 +18,6 @@ __all__ = [
     "GetTableName",
     "GetDBHealthRunning",
     "GetDBHealthIndexUsage",
-    "UsePromptQueryTableData"
+    "UsePromptQueryTableData",
+    "OptimizeSql"
 ]

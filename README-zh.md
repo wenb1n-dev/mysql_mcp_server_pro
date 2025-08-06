@@ -38,6 +38,7 @@ mcp_mysql_server_pro 不仅止于mysql的增删改查功能，还包含了数据
 | get_table_name        | 根据表注释、表描述搜索数据库中对应的表名                                                                                                               |
 | get_db_health_index_usage | 获取当前连接的mysql库的索引使用情况,包含冗余索引情况、性能较差的索引情况、未使用索引且查询时间大于30秒top5情况                                                                      |
 | use_prompt_queryTableData | 使用内置提示词，让模型构建一个链式调用mcp中的工具(不作为常用固定工具，需自行调整代码开启，详见该类)                                                                               |
+| optimize_sql |  专业的SQL性能优化工具，基于MySQL执行计划、表结构信息、表数据量、表索引提供专家级优化建议。 | 
 
 ## prompt 列表
 | prompt名称                   | 描述                                                                                                                                 |
