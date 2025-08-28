@@ -6,6 +6,8 @@ SQLAlchemy数据库连接池工具类
 import logging
 from contextlib import contextmanager
 from typing import Dict, Any, Optional
+from urllib.parse import quote_plus
+
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import Engine
 from sqlalchemy.pool import QueuePool, SingletonThreadPool, NullPool
@@ -224,7 +226,10 @@ def create_mysql_pool(host: str, port: int = 3306, user: str = "root",
         SQLAlchemyConnectionPool: MySQL连接池实例
     """
     # 构建MySQL连接URL
-    database_url = f"mysql+pymysql://{user}:{password}@{host}:{port}/{database}"
+    quote_plus_user = quote_plus(user)
+    quote_plus_password = quote_plus(password)
+
+    database_url = f"mysql+pymysql://{quote_plus_user}:{quote_plus_password}@{host}:{port}/{database}"
     
     return SQLAlchemyConnectionPool(
         database_url=database_url,
