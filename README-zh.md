@@ -3,9 +3,12 @@
 [![MseeP.ai Security Assessment Badge](https://mseep.net/mseep-audited.png)](https://mseep.ai/app/wenb1n-dev-mysql-mcp-server-pro)
 [![MCPHub](https://img.shields.io/badge/mcphub-audited-blue)](https://mcphub.com/mcp-servers/wenb1n-dev/mysql_mcp_server_pro)
 
+> 推荐使用新项目 ： https://github.com/wenb1n-dev/SmartDB_MCP 
+> SmartDB是一个通用数据库网关，支持跨库查询，支持多库连接，支持mysql，postgresql，oracle，mssql，也同样欢迎点赞支持，动力才满满。
 
 # mcp_mysql_server_pro
-## 好用就帮忙点个赞，支持一下呀，拜托各位精英们～。
+## 好用就帮忙点个赞，支持一下呀，最好两个项目都点点，拜托各位精英们～。
+
 ## 介绍
 mcp_mysql_server_pro 不仅止于mysql的增删改查功能，还包含了数据库异常分析能力，且便于开发者们进行个性化的工具扩展
 
